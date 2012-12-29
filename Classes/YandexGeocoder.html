@@ -1,0 +1,783 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>YandexGeocoder Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">YandexGeocoder </a></h1>
+				<a id="developerHome" href="../index.html">mkuznetsov</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">YandexGeocoder Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/sharedInstance">&nbsp;&nbsp;&nbsp;&nbsp;+ sharedInstance</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/cancelAllRequestsForDelegate:">&nbsp;&nbsp;&nbsp;&nbsp;- cancelAllRequestsForDelegate:</option>
+	
+	<option value="//api/name/convertResponse:">&nbsp;&nbsp;&nbsp;&nbsp;- convertResponse:</option>
+	
+	<option value="//api/name/forwardGeocoding:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- forwardGeocoding:delegate:</option>
+	
+	<option value="//api/name/forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:</option>
+	
+	<option value="//api/name/makeRequest:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- makeRequest:delegate:</option>
+	
+	<option value="//api/name/radiansWithDistance:">&nbsp;&nbsp;&nbsp;&nbsp;- radiansWithDistance:</option>
+	
+	<option value="//api/name/reversedGeocodingForLatitude:longitude:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- reversedGeocodingForLatitude:longitude:delegate:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Helpers">Helpers</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sharedInstance">sharedInstance</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancelAllRequestsForDelegate:">cancelAllRequestsForDelegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/convertResponse:">convertResponse:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/forwardGeocoding:delegate:">forwardGeocoding:delegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:">forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/makeRequest:delegate:">makeRequest:delegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/radiansWithDistance:">radiansWithDistance:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/reversedGeocodingForLatitude:longitude:delegate:">reversedGeocodingForLatitude:longitude:delegate:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="YandexGeocoder Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">YandexGeocoder Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">YandexGeocoder.h<br />YandexGeocoder.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Use Yandex Geocoding API for forward and reversed geocoding.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sharedInstance">+&nbsp;sharedInstance</a></code>
+		<span class="tooltip"><p>Singleton</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cancelAllRequestsForDelegate:">&ndash;&nbsp;cancelAllRequestsForDelegate:</a></code>
+		<span class="tooltip"><p>Cancels all requests associated with given delegate</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/reversedGeocodingForLatitude:longitude:delegate:">&ndash;&nbsp;reversedGeocodingForLatitude:longitude:delegate:</a></code>
+		<span class="tooltip"><p>Get list of places at point</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/forwardGeocoding:delegate:">&ndash;&nbsp;forwardGeocoding:delegate:</a></code>
+		<span class="tooltip"><p>Get list of places for address</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:">&ndash;&nbsp;forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:</a></code>
+		<span class="tooltip"><p>Get list of places for address</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Helpers" name="task_Helpers"></a>
+						<h3 class="subsubtitle task-title">Helpers</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/makeRequest:delegate:">&ndash;&nbsp;makeRequest:delegate:</a></code>
+		<span class="tooltip"><p>Makes actual request</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/convertResponse:">&ndash;&nbsp;convertResponse:</a></code>
+		<span class="tooltip"><p>Converts response to more simple structure</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/radiansWithDistance:">&ndash;&nbsp;radiansWithDistance:</a></code>
+		<span class="tooltip"><p>s = r * θ;
+s = arc length covered;
+r = radius of the circle;
+θ = angle in radians;</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/sharedInstance" title="sharedInstance"></a>
+	<h3 class="subsubtitle method-title">sharedInstance</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Singleton</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (id)sharedInstance</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>id</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/cancelAllRequestsForDelegate:" title="cancelAllRequestsForDelegate:"></a>
+	<h3 class="subsubtitle method-title">cancelAllRequestsForDelegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Cancels all requests associated with given delegate</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)cancelAllRequestsForDelegate:(id&lt;YandexGeocoderDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/convertResponse:" title="convertResponse:"></a>
+	<h3 class="subsubtitle method-title">convertResponse:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Converts response to more simple structure</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSMutableDictionary *)convertResponse:(id)<em>responseObject</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>responseObject</em></dt>
+			<dd><p>JSON response</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Simplified response</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/forwardGeocoding:delegate:" title="forwardGeocoding:delegate:"></a>
+	<h3 class="subsubtitle method-title">forwardGeocoding:delegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Get list of places for address</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)forwardGeocoding:(NSString *)<em>address</em> delegate:(id&lt;YandexGeocoderDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>address</em></dt>
+			<dd><p>delegate Delegate</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:" title="forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:"></a>
+	<h3 class="subsubtitle method-title">forwardGeocoding:limitCenterLat:limitCenterLng:radius:limitToBounds:delegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Get list of places for address</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)forwardGeocoding:(NSString *)<em>address</em> limitCenterLat:(double)<em>limitCenterLat</em> limitCenterLng:(double)<em>limitCenterLng</em> radius:(double)<em>radius</em> limitToBounds:(BOOL)<em>limitToBounds</em> delegate:(id&lt;YandexGeocoderDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>address</em></dt>
+			<dd><p>Query string</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limitCenterLat</em></dt>
+			<dd><p>Latitude of the center of the bounding area</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limitCenterLng</em></dt>
+			<dd><p>Longitude of the center of the bounding area</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>radius</em></dt>
+			<dd><p>Radius of the bounding area</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limitToBounds</em></dt>
+			<dd><p>YES &ndash; limit search to bounding area, NO &ndash; don&rsquo;t limit, but return results within the bounding area first</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/makeRequest:delegate:" title="makeRequest:delegate:"></a>
+	<h3 class="subsubtitle method-title">makeRequest:delegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Makes actual request</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)makeRequest:(NSMutableDictionary *)<em>params</em> delegate:(id&lt;YandexGeocoderDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>params</em></dt>
+			<dd><p>GET-parameters</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>Delegate than will be notified upon request completion</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Adds required parameters to each request.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/radiansWithDistance:" title="radiansWithDistance:"></a>
+	<h3 class="subsubtitle method-title">radiansWithDistance:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>s = r * θ;
+s = arc length covered;
+r = radius of the circle;
+θ = angle in radians;</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (double)radiansWithDistance:(double)<em>meters</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>meters</em></dt>
+			<dd><p>Distance in meters</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>radians</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Earth radius ~ 6371000.01</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/reversedGeocodingForLatitude:longitude:delegate:" title="reversedGeocodingForLatitude:longitude:delegate:"></a>
+	<h3 class="subsubtitle method-title">reversedGeocodingForLatitude:longitude:delegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Get list of places at point</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)reversedGeocodingForLatitude:(double)<em>latitude</em> longitude:(double)<em>longitude</em> delegate:(id&lt;YandexGeocoderDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>latitude</em></dt>
+			<dd><p>Latitude</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>longitude</em></dt>
+			<dd><p>Longitude</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>Delegate</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YandexGeocoder.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 mkuznetsov. All rights reserved. (Last updated: 2012-12-29)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>
