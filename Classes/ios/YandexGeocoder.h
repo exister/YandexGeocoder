@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 #define kYandexGeocoderBaseUrl @"http://geocode-maps.yandex.ru"
 #define kYandexGeocoderEarthRadius 6371000.01
@@ -12,6 +13,12 @@
 + (id)sharedInstance;
 
 - (void)cancelAllRequestsForDelegate:(id <YandexGeocoderDelegate>)delegate;
+
++ (CLLocation *)locationFromObject:(NSDictionary *)object;
+
++ (NSString *)titleFromObject:(NSDictionary *)object;
+
++ (NSString *)placeTypeFromObject:(NSDictionary *)object;
 
 - (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude delegate:(id <YandexGeocoderDelegate>)delegate;
 

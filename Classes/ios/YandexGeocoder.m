@@ -127,6 +127,38 @@
     return meters / kYandexGeocoderEarthRadius;
 }
 
+/** Extracts coordinates from place
+*
+* @param object Place item returned by convertResponse:
+* @return CLLocation
+*/
++ (CLLocation *)locationFromObject:(NSDictionary *)object
+{
+    NSArray *coords = [(NSString *)object[@"Point"][@"pos"] componentsSeparatedByString:@" "];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[(NSString *)coords[1] doubleValue] longitude:[(NSString *)coords[0] doubleValue]];
+    return location;
+}
+
+/** Extracts title from place
+*
+* @param object Place item returned by convertResponse:
+* @return Place title
+*/
++ (NSString *)titleFromObject:(NSDictionary *)object
+{
+    return object[@"metaDataProperty"][@"GeocoderMetaData"][@"text"];
+}
+
+/** Extracts place type from place
+*
+* @param object Place item returned by convertResponse:
+* @return Place type
+*/
++ (NSString *)placeTypeFromObject:(NSDictionary *)object
+{
+    return object[@"metaDataProperty"][@"GeocoderMetaData"][@"kind"];
+}
+
 #pragma mark - Geocoding
 /**@name Geocoding */
 
