@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "YandexGeocoder"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Use Yandex Geocoding API for forward and reversed geocoding."
   s.homepage     = "https://github.com/exister/YandexGeocoder"
   s.license      = 'MIT'
