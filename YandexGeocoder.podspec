@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/**/*.{h,m}'
   s.requires_arc = true
   s.weak_frameworks = 'CoreLocation'
-  s.dependency 'AFNetworking', '~> 1.0.1'
+  s.dependency 'AFNetworking', '~> 1.1.0'
 end
