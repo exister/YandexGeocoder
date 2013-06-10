@@ -58,7 +58,10 @@
 {
     params[@"sco"] = @"longlat"; //coordinates order
     params[@"format"] = @"json";
-    params[@"lang"] = [[NSLocale currentLocale] localeIdentifier];
+
+    if (params[@"lang"] == nil) {
+        params[@"lang"] = [[NSLocale currentLocale] localeIdentifier];
+    }
 
     [self.client getPath:@"1.x/" delegate:delegate parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
@@ -170,12 +173,44 @@
 */
 - (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude delegate:(id <YandexGeocoderDelegate>)delegate
 {
+    [self reversedGeocodingForLatitude:latitude longitude:longitude language:nil kind:nil delegate:delegate];
+}
+
+/** Get list of places at point
+*
+* @param latitude Latitude
+* @param longitude Longitude
+* @param language Language Code
+* @param delegate Delegate
+*/
+- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language delegate:(id <YandexGeocoderDelegate>)delegate {
+    [self reversedGeocodingForLatitude:latitude longitude:longitude language:language kind:nil delegate:delegate];
+}
+
+/** Get list of places at point
+*
+* @param latitude Latitude
+* @param longitude Longitude
+* @param language Language Code
+* @param kind (house, street, metro, district, locality)
+* @param delegate Delegate
+*/
+- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language kind:(NSString *)kind delegate:(id <YandexGeocoderDelegate>)delegate {
 #ifdef DDLogInfo
     DDLogInfo(@"Reverse geocoding: lat %f, lng %f", latitude, longitude);
 #else
     NSLog(@"Reverse geocoding: lat %f, lng %f", latitude, longitude);
 #endif
-    NSMutableDictionary *params = [@{@"geocode": [NSString stringWithFormat:@"%.07f,%.07f", longitude, latitude]} mutableCopy];
+    NSMutableDictionary *params = [@{
+            @"geocode": [NSString stringWithFormat:@"%.07f,%.07f", longitude, latitude],
+    } mutableCopy];
+
+    if (language != nil) {
+        params[@"lang"] = language;
+    }
+    if (kind != nil) {
+        params[@"kind"] = kind;
+    }
     [self makeRequest:params delegate:delegate];
 }
 

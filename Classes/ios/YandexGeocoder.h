@@ -22,6 +22,10 @@
 
 - (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude delegate:(id <YandexGeocoderDelegate>)delegate;
 
+- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language delegate:(id <YandexGeocoderDelegate>)delegate;
+
+- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language kind:(NSString *)kind delegate:(id <YandexGeocoderDelegate>)delegate;
+
 - (void)forwardGeocoding:(NSString *)address delegate:(id <YandexGeocoderDelegate>)delegate;
 
 - (void)forwardGeocoding:(NSString *)address limitCenterLat:(double)limitCenterLat limitCenterLng:(double)limitCenterLng radius:(double)radius limitToBounds:(BOOL)limitToBounds delegate:(id <YandexGeocoderDelegate>)delegate;
