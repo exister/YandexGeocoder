@@ -6,7 +6,8 @@
 #import "YandexGeocoderClient.h"
 
 @interface YandexGeocoder ()
-- (void)makeRequest:(NSMutableDictionary *)params delegate:(id <YandexGeocoderDelegate>)delegate;
+
+- (void)makeRequestWithParams:(NSMutableDictionary *)params success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
 
 - (NSMutableDictionary *)convertResponse:(id)responseObject;
 
@@ -54,7 +55,10 @@
 * @param params GET-parameters
 * @param delegate Delegate than will be notified upon request completion
 */
-- (void)makeRequest:(NSMutableDictionary *)params delegate:(id <YandexGeocoderDelegate>)delegate
+- (void)makeRequestWithParams:(NSMutableDictionary *)params
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                        owner:(id)owner
 {
     params[@"sco"] = @"longlat"; //coordinates order
     params[@"format"] = @"json";
@@ -63,7 +67,7 @@
         params[@"lang"] = [[NSLocale currentLocale] localeIdentifier];
     }
 
-    [self.client getPath:@"1.x/" delegate:delegate parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+    [self.client getPath:@"1.x/" delegate:owner parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
 #ifdef DDLogInfo
         DDLogInfo(@"Yandex Geocoder finished");
@@ -71,7 +75,7 @@
         NSLog(@"Yandex Geocoder finished");
 #endif
         NSMutableDictionary *places = [self convertResponse:responseObject];
-        [delegate yandexGeocoderRequestFinished:places];
+        success(operation, responseObject, places);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
 #ifdef DDLogError
@@ -79,14 +83,14 @@
 #else
         NSLog(@"Yandex Geocoder failed");
 #endif
-        [delegate yandexGeocoderRequestFailed];
+        failure(operation, error);
     }];
 }
 
 /** Cancels all requests associated with given delegate
 *
 */
-- (void)cancelAllRequestsForDelegate:(id<YandexGeocoderDelegate>)delegate
+- (void)cancelAllRequestsForDelegate:(id)delegate
 {
     [self.client cancelAllOperationsForDelegate:delegate];
 }
@@ -171,9 +175,13 @@
 * @param longitude Longitude
 * @param delegate Delegate
 */
-- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude delegate:(id <YandexGeocoderDelegate>)delegate
+- (void)reversedGeocodingForLatitude:(double)latitude
+                           longitude:(double)longitude
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                               owner:(id)owner
 {
-    [self reversedGeocodingForLatitude:latitude longitude:longitude language:nil kind:nil delegate:delegate];
+    [self reversedGeocodingForLatitude:latitude longitude:longitude language:nil kind:nil success:success failure:failure owner:owner];
 }
 
 /** Get list of places at point
@@ -183,8 +191,13 @@
 * @param language Language Code
 * @param delegate Delegate
 */
-- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language delegate:(id <YandexGeocoderDelegate>)delegate {
-    [self reversedGeocodingForLatitude:latitude longitude:longitude language:language kind:nil delegate:delegate];
+- (void)reversedGeocodingForLatitude:(double)latitude
+                           longitude:(double)longitude
+                            language:(NSString *)language
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                               owner:(id)owner {
+    [self reversedGeocodingForLatitude:latitude longitude:longitude language:language kind:nil success:success failure:failure owner:owner];
 }
 
 /** Get list of places at point
@@ -195,7 +208,13 @@
 * @param kind (house, street, metro, district, locality)
 * @param delegate Delegate
 */
-- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language kind:(NSString *)kind delegate:(id <YandexGeocoderDelegate>)delegate {
+- (void)reversedGeocodingForLatitude:(double)latitude
+                           longitude:(double)longitude
+                            language:(NSString *)language
+                                kind:(NSString *)kind
+                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                               owner:(id)owner {
 #ifdef DDLogInfo
     DDLogInfo(@"Reverse geocoding: lat %f, lng %f", latitude, longitude);
 #else
@@ -211,7 +230,7 @@
     if (kind != nil) {
         params[@"kind"] = kind;
     }
-    [self makeRequest:params delegate:delegate];
+    [self makeRequestWithParams:params success:success failure:failure owner:owner];
 }
 
 /** Get list of places for address
@@ -219,7 +238,10 @@
 * @param address Query string
 * @param address delegate Delegate
 */
-- (void)forwardGeocoding:(NSString *)address delegate:(id <YandexGeocoderDelegate>)delegate
+- (void)forwardGeocoding:(NSString *)address
+                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                   owner:(id)owner
 {
 #ifdef DDLogInfo
     DDLogInfo(@"Forward geocoding: %@", address);
@@ -227,7 +249,7 @@
     NSLog(@"Forward geocoding: %@", address);
 #endif
     NSMutableDictionary *params = [@{@"geocode": address} mutableCopy];
-    [self makeRequest:params delegate:delegate];
+    [self makeRequestWithParams:params success:success failure:failure owner:owner];
 }
 
 /** Get list of places for address
@@ -238,7 +260,14 @@
 * @param radius Radius of the bounding area
 * @param limitToBounds YES - limit search to bounding area, NO - don't limit, but return results within the bounding area first
 */
-- (void)forwardGeocoding:(NSString *)address limitCenterLat:(double)limitCenterLat limitCenterLng:(double)limitCenterLng radius:(double)radius limitToBounds:(BOOL)limitToBounds delegate:(id <YandexGeocoderDelegate>)delegate
+- (void)forwardGeocoding:(NSString *)address
+          limitCenterLat:(double)limitCenterLat
+          limitCenterLng:(double)limitCenterLng
+                  radius:(double)radius
+           limitToBounds:(BOOL)limitToBounds
+                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+                   owner:(id)owner
 {
 #ifdef DDLogInfo
     DDLogInfo(@"Forward geocoding: %@, lat %f, lng %f, rad %f, limit %d", address, limitCenterLat, limitCenterLng, radius, limitToBounds);
@@ -251,7 +280,7 @@
             @"ll": [NSString stringWithFormat:@"%.07f,%.07f", limitCenterLng, limitCenterLat],
             @"spn": [NSString stringWithFormat:@"%.07f", [self radiansWithDistance:radius]]
     } mutableCopy];
-    [self makeRequest:params delegate:delegate];
+    [self makeRequestWithParams:params success:success failure:failure owner:owner];
 }
 
 @end

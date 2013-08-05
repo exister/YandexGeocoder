@@ -5,7 +5,6 @@
 
 #import <objc/runtime.h>
 #import "YandexGeocoderClient.h"
-#import "AFNetworking.h"
 
 static char kGeocodingOperationDelegateObjectKey;
 
@@ -37,7 +36,7 @@ static char kGeocodingOperationDelegateObjectKey;
 * @param success Completion block
 * @param failure Failure block
 */
-- (void)getPath:(NSString *)path delegate:(id<YandexGeocoderDelegate>)delegate parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)getPath:(NSString *)path delegate:(id)delegate parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
@@ -51,14 +50,14 @@ static char kGeocodingOperationDelegateObjectKey;
 *
 * @param delegate Delegate
 */
-- (void)cancelAllOperationsForDelegate:(id<YandexGeocoderDelegate>)delegate
+- (void)cancelAllOperationsForDelegate:(id)delegate
 {
     for (NSOperation *operation in [self.operationQueue operations]) {
         if (![operation isKindOfClass:[AFHTTPRequestOperation class]]) {
             continue;
         }
 
-        BOOL match = (id<YandexGeocoderDelegate>)objc_getAssociatedObject(operation, &kGeocodingOperationDelegateObjectKey) == delegate;
+        BOOL match = (id)objc_getAssociatedObject(operation, &kGeocodingOperationDelegateObjectKey) == delegate;
 
         if (match) {
             [operation cancel];
