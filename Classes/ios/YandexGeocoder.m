@@ -156,6 +156,30 @@
     return object[@"metaDataProperty"][@"GeocoderMetaData"][@"text"];
 }
 
+/** Extracts city from place
+*
+* @param object Place item returned by convertResponse:
+* @return Place city
+*/
++ (NSString *)cityFromObject:(NSDictionary *)object
+{
+    NSArray *paths = @[
+        @"metaDataProperty.GeocoderMetaData.AddressDetails.Country.AdministrativeArea.Locality.LocalityName",
+        @"metaDataProperty.GeocoderMetaData.AddressDetails.Country.Locality.LocalityName",
+        @"metaDataProperty.GeocoderMetaData.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName"
+    ];
+
+    NSString *city;
+    for (int i = 0; i < paths.count; i++) {
+        city = [object valueForKeyPath:paths[i]];
+        if (city) {
+            break;
+        }
+    }
+
+    return city;
+}
+
 /** Extracts place type from place
 *
 * @param object Place item returned by convertResponse:

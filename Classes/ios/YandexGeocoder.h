@@ -28,6 +28,8 @@
 
 + (NSString *)titleFromObject:(NSDictionary *)object;
 
++ (NSString *)cityFromObject:(NSDictionary *)object;
+
 + (NSString *)placeTypeFromObject:(NSDictionary *)object;
 
 @end
