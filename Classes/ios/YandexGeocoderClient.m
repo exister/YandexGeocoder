@@ -39,6 +39,9 @@ static char kGeocodingOperationDelegateObjectKey;
 - (void)getPath:(NSString *)path delegate:(id)delegate parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+
+    NSLog(@"%@", request.URL);
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
 
     objc_setAssociatedObject(operation, &kGeocodingOperationDelegateObjectKey, delegate, OBJC_ASSOCIATION_ASSIGN);

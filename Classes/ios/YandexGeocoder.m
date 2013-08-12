@@ -289,6 +289,7 @@
           limitCenterLng:(double)limitCenterLng
                   radius:(double)radius
            limitToBounds:(BOOL)limitToBounds
+                language:(NSString *)language
                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success
                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
                    owner:(id)owner
@@ -304,6 +305,11 @@
             @"ll": [NSString stringWithFormat:@"%.07f,%.07f", limitCenterLng, limitCenterLat],
             @"spn": [NSString stringWithFormat:@"%.07f", [self radiansWithDistance:radius]]
     } mutableCopy];
+
+    if (language != nil) {
+        params[@"lang"] = language;
+    }
+
     [self makeRequestWithParams:params success:success failure:failure owner:owner];
 }
 
