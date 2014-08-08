@@ -6,9 +6,9 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { "Mikhail Kuznetsov" => "strelok.ru@gmail.com" }
   s.source       = { :git => "https://github.com/exister/YandexGeocoder.git", :tag => "0.0.5" }
-  s.platform     = :ios, '5.0'
+  s.platform     = :ios, '7.0'
   s.source_files = 'Classes/**/*.{h,m}'
   s.requires_arc = true
   s.weak_frameworks = 'CoreLocation'
-  s.dependency 'AFNetworking', '~> 1.3.0'
+  s.dependency 'AFNetworking'
 end
