@@ -13,16 +13,15 @@ static char kGeocodingOperationDelegateObjectKey;
 @end
 
 @implementation YandexGeocoderClient
-{
 
-}
-
-- (id)initWithBaseURL:(NSURL *)url
+- (id)initWithBaseURL:(NSString *)url
 {
-    self = [super initWithBaseURL:url];
+    self = [super init];
     if (self) {
-        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [self setDefaultHeader:@"Accept" value:@"application/json"];
+        _operationManager = [AFHTTPRequestOperationManager manager];
+        _operationManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        [_operationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        _baseUrl = url;
     }
 
     return self;
@@ -38,15 +37,13 @@ static char kGeocodingOperationDelegateObjectKey;
 */
 - (void)getPath:(NSString *)path delegate:(id)delegate parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    NSURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
-
-    NSLog(@"%@", request.URL);
-
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-
+    
+    AFHTTPRequestOperation *operation = [_operationManager GET:[_baseUrl stringByAppendingString:path]
+                                                    parameters:parameters
+                                                       success:success
+                                                       failure:failure];
+ 
     objc_setAssociatedObject(operation, &kGeocodingOperationDelegateObjectKey, delegate, OBJC_ASSOCIATION_ASSIGN);
-
-    [self enqueueHTTPRequestOperation:operation];
 }
 
 /** Cancels all operations associated with delegate
@@ -55,7 +52,7 @@ static char kGeocodingOperationDelegateObjectKey;
 */
 - (void)cancelAllOperationsForDelegate:(id)delegate
 {
-    for (NSOperation *operation in [self.operationQueue operations]) {
+    for (NSOperation *operation in [_operationManager.operationQueue operations]) {
         if (![operation isKindOfClass:[AFHTTPRequestOperation class]]) {
             continue;
         }

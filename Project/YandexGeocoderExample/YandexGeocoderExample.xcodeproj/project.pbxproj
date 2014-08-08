@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B8D11E268E54DA79961515C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB122C2242945E5BB2AD89C /* libPods.a */; settings = {}; };
+		0B8D11E268E54DA79961515C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB122C2242945E5BB2AD89C /* libPods.a */; };
 		18A039D6168F3DD700550B8D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A039D5168F3DD700550B8D /* UIKit.framework */; };
 		18A039D8168F3DD700550B8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A039D7168F3DD700550B8D /* Foundation.framework */; };
 		18A039DA168F3DD700550B8D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A039D9168F3DD700550B8D /* CoreGraphics.framework */; };
@@ -59,7 +59,7 @@
 		18A03A03168F3DD800550B8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		18A03A05168F3DD800550B8D /* YandexGeocoderExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YandexGeocoderExampleTests.h; sourceTree = "<group>"; };
 		18A03A06168F3DD800550B8D /* YandexGeocoderExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YandexGeocoderExampleTests.m; sourceTree = "<group>"; };
-		ACB122C2242945E5BB2AD89C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACB122C2242945E5BB2AD89C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F18AAE6E4FB44190B08030B7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -226,8 +226,6 @@
 			mainGroup = 18A039C6168F3DD700550B8D;
 			productRefGroup = 18A039D2168F3DD700550B8D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
 				18A039D0168F3DD700550B8D /* YandexGeocoderExample */,
@@ -286,7 +284,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 1;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -404,6 +401,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YandexGeocoderExample/YandexGeocoderExample-Prefix.pch";
 				INFOPLIST_FILE = "YandexGeocoderExample/YandexGeocoderExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -416,6 +414,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YandexGeocoderExample/YandexGeocoderExample-Prefix.pch";
 				INFOPLIST_FILE = "YandexGeocoderExample/YandexGeocoderExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -474,6 +473,7 @@
 				18A03A0C168F3DD800550B8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18A03A0D168F3DD800550B8D /* Build configuration list for PBXNativeTarget "YandexGeocoderExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +482,7 @@
 				18A03A0F168F3DD800550B8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

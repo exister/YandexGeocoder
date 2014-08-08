@@ -2,7 +2,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AFNetworking.h"
 
-#define kYandexGeocoderBaseUrl @"http://geocode-maps.yandex.ru"
+#define kYandexGeocoderBaseUrl @"http://geocode-maps.yandex.ru/"
 #define kYandexGeocoderEarthRadius 6371000.01
 
 @class YandexGeocoderClient;

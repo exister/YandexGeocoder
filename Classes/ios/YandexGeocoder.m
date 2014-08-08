@@ -44,7 +44,7 @@
 {
     if (self = [super init])
     {
-        _client = [[YandexGeocoderClient alloc] initWithBaseURL: [NSURL URLWithString: kYandexGeocoderBaseUrl]];
+        _client = [[YandexGeocoderClient alloc] initWithBaseURL: kYandexGeocoderBaseUrl];
     }
     return self;
 }
