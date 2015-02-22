@@ -217,7 +217,7 @@
 *
 * @param latitude Latitude
 * @param longitude Longitude
-* @param delegate Delegate
+* @param owner Delegate
 */
 - (void) reversedGeocodingForLatitude: (double) latitude
                             longitude: (double) longitude
@@ -234,7 +234,7 @@
 * @param latitude Latitude
 * @param longitude Longitude
 * @param language Language Code
-* @param delegate Delegate
+* @param owner Delegate
 */
 - (void) reversedGeocodingForLatitude: (double) latitude
                             longitude: (double) longitude
@@ -253,7 +253,7 @@
 * @param longitude Longitude
 * @param language Language Code
 * @param kind (house, street, metro, district, locality)
-* @param delegate Delegate
+* @param owner Delegate
 */
 - (void) reversedGeocodingForLatitude: (double) latitude
                             longitude: (double) longitude
@@ -286,7 +286,7 @@
 /** Get list of places for address
 *
 * @param address Query string
-* @param address delegate Delegate
+* @param owner Delegate
 */
 - (void) forwardGeocoding: (NSString*) address
                   success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
@@ -299,6 +299,31 @@
     NSLog(@"Forward geocoding: %@", address);
 #endif
     NSMutableDictionary* params = [@{@"geocode" : address} mutableCopy];
+    [self makeRequestWithParams: params success: success failure: failure owner: owner];
+}
+
+/** Get list of places for address
+ *
+ * @param address Query string
+ * @param language Language Code
+ * @param owner Delegate
+ */
+- (void) forwardGeocoding: (NSString*) address
+                 language: (NSString*) language
+                  success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
+                  failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                    owner: (id) owner
+{
+#ifdef DDLogInfo
+    DDLogInfo(@"Forward geocoding: %@", address);
+#else
+    NSLog(@"Forward geocoding: %@", address);
+#endif
+    NSMutableDictionary* params = [@{@"geocode" : address} mutableCopy];
+    if (language != nil)
+    {
+        params[@"lang"] = language;
+    }
     [self makeRequestWithParams: params success: success failure: failure owner: owner];
 }
 

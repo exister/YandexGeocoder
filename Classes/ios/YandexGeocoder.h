@@ -22,6 +22,12 @@
 
 - (void)forwardGeocoding:(NSString *)address success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
 
+- (void)forwardGeocoding: (NSString*) address
+                language: (NSString*) language
+                 success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
+                 failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                   owner: (id) owner;
+
 - (void)forwardGeocoding:(NSString *)address limitCenterLat:(double)limitCenterLat limitCenterLng:(double)limitCenterLng radius:(double)radius limitToBounds:(BOOL)limitToBounds language:(NSString *)language success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
 
 + (CLLocation *)locationFromObject:(NSDictionary *)object;

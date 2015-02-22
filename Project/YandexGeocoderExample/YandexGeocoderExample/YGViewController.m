@@ -60,7 +60,7 @@
 
 - (IBAction)onQueryToLocations:(id)sender {
     [self.query resignFirstResponder];
-    [[YandexGeocoder sharedInstance] forwardGeocoding:self.query.text success:^(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places) {
+    [[YandexGeocoder sharedInstance] forwardGeocoding:self.query.text language:@"RU" success:^(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places) {
         [self yandexGeocoderRequestFinished:places];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self yandexGeocoderRequestFailed];
