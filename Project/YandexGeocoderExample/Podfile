@@ -1,3 +1,5 @@
 platform :ios, '6.0'
 
-pod 'YandexGeocoder', :path => "../../../YandexGeocoder"
+target 'YandexGeocoderExample' do
+    pod 'YandexGeocoder', :path => "../../../YandexGeocoder"
+end
