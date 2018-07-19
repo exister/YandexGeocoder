@@ -32,6 +32,12 @@
     self.manager.headingFilter = 30.0;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.manager requestWhenInUseAuthorization];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -60,20 +66,32 @@
 
 - (IBAction)onQueryToLocations:(id)sender {
     [self.query resignFirstResponder];
-    [[YandexGeocoder sharedInstance] forwardGeocoding:self.query.text language:@"RU" success:^(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places) {
-        [self yandexGeocoderRequestFinished:places];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self yandexGeocoderRequestFailed];
-    } owner:self];
+    [[YandexGeocoder sharedInstance] forwardGeocoding:self.query.text
+                                             language:@"RU"
+                                              success:^(NSURLSessionDataTask *task, id responseObject, NSDictionary *places) {
+                                                  
+                                                  [self yandexGeocoderRequestFinished:places];
+                                                  
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  
+                                                  [self yandexGeocoderRequestFailed];
+                                                  
+                                              } owner:self];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
-    [[YandexGeocoder sharedInstance] reversedGeocodingForLatitude:location.coordinate.latitude longitude:location.coordinate.longitude language:@"EN" kind:@"house" success:^(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places) {
-        [self yandexGeocoderRequestFinished:places];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self yandexGeocoderRequestFailed];
-    } owner:self];
+    [[YandexGeocoder sharedInstance] reversedGeocodingForLatitude:location.coordinate.latitude
+                                                        longitude:location.coordinate.longitude
+                                                         language:@"EN"
+                                                             kind:@"house"
+                                                          success:^(NSURLSessionDataTask *task, id responseObject, NSDictionary *places) {
+                                                              [self yandexGeocoderRequestFinished:places];
+                                                          }
+                                                          failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                              [self yandexGeocoderRequestFailed];
+                                                          }
+                                                            owner:self];
 }
 @end
