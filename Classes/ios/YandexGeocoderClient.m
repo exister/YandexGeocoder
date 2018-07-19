@@ -18,9 +18,9 @@ static char kGeocodingOperationDelegateObjectKey;
 {
     self = [super init];
     if (self) {
-        _operationManager = [AFHTTPRequestOperationManager manager];
-        _operationManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        [_operationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        _sessionManager = [AFHTTPSessionManager manager];
+        _sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        [_sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         _baseUrl = url;
     }
 
@@ -35,15 +35,20 @@ static char kGeocodingOperationDelegateObjectKey;
 * @param success Completion block
 * @param failure Failure block
 */
-- (void)getPath:(NSString *)path delegate:(id)delegate parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)getPath:(NSString *)path
+       delegate:(id)delegate
+     parameters:(NSDictionary *)parameters
+        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     
-    AFHTTPRequestOperation *operation = [_operationManager GET:[_baseUrl stringByAppendingString:path]
-                                                    parameters:parameters
-                                                       success:success
-                                                       failure:failure];
+    NSURLSessionDataTask *dataTask = [_sessionManager GET:[_baseUrl stringByAppendingString:path]
+                                               parameters:parameters
+                                                 progress:nil
+                                                  success:success
+                                                  failure:failure];
  
-    objc_setAssociatedObject(operation, &kGeocodingOperationDelegateObjectKey, delegate, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(dataTask, &kGeocodingOperationDelegateObjectKey, delegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 /** Cancels all operations associated with delegate
@@ -52,15 +57,11 @@ static char kGeocodingOperationDelegateObjectKey;
 */
 - (void)cancelAllOperationsForDelegate:(id)delegate
 {
-    for (NSOperation *operation in [_operationManager.operationQueue operations]) {
-        if (![operation isKindOfClass:[AFHTTPRequestOperation class]]) {
-            continue;
-        }
-
-        BOOL match = (id)objc_getAssociatedObject(operation, &kGeocodingOperationDelegateObjectKey) == delegate;
-
+    for (NSURLSessionDataTask *task in _sessionManager.dataTasks) {
+        BOOL match = (id)objc_getAssociatedObject(task, &kGeocodingOperationDelegateObjectKey) == delegate;
+        
         if (match) {
-            [operation cancel];
+            [task cancel];
         }
     }
 }

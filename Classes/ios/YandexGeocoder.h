@@ -14,21 +14,46 @@
 
 - (void)cancelAllRequestsForDelegate:(id)delegate;
 
-- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
+- (void)reversedGeocodingForLatitude:(double)latitude
+                           longitude:(double)longitude
+                             success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                               owner:(id)owner;
 
-- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
+- (void)reversedGeocodingForLatitude:(double)latitude
+                           longitude:(double)longitude
+                            language:(NSString *)language
+                             success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                               owner:(id)owner;
 
-- (void)reversedGeocodingForLatitude:(double)latitude longitude:(double)longitude language:(NSString *)language kind:(NSString *)kind success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
+- (void)reversedGeocodingForLatitude:(double)latitude
+                           longitude:(double)longitude
+                            language:(NSString *)language
+                                kind:(NSString *)kind
+                             success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                               owner:(id)owner;
 
-- (void)forwardGeocoding:(NSString *)address success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
+- (void)forwardGeocoding:(NSString *)address
+                 success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                   owner:(id)owner;
 
 - (void)forwardGeocoding: (NSString*) address
                 language: (NSString*) language
-                 success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                 failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                 success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                 failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                    owner: (id) owner;
 
-- (void)forwardGeocoding:(NSString *)address limitCenterLat:(double)limitCenterLat limitCenterLng:(double)limitCenterLng radius:(double)radius limitToBounds:(BOOL)limitToBounds language:(NSString *)language success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSDictionary *places))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure owner:(id)owner;
+- (void)forwardGeocoding:(NSString *)address
+          limitCenterLat:(double)limitCenterLat
+          limitCenterLng:(double)limitCenterLng
+                  radius:(double)radius
+           limitToBounds:(BOOL)limitToBounds
+                language:(NSString *)language
+                 success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure owner:(id)owner;
 
 + (CLLocation *)locationFromObject:(NSDictionary *)object;
 

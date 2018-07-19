@@ -7,7 +7,10 @@
 
 @interface YandexGeocoder ()
 
-- (void) makeRequestWithParams: (NSMutableDictionary*) params success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure owner: (id) owner;
+- (void) makeRequestWithParams: (NSMutableDictionary*) params
+                       success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                       failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
+                         owner: (id) owner;
 
 - (NSMutableDictionary*) convertResponse: (id) responseObject;
 
@@ -57,11 +60,11 @@
 * Adds required parameters to each request.
 *
 * @param params GET-parameters
-* @param delegate Delegate than will be notified upon request completion
+* @param owner Delegate than will be notified upon request completion
 */
 - (void) makeRequestWithParams: (NSMutableDictionary*) params
-                       success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                       failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                       success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                       failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                          owner: (id) owner
 {
     params[@"sco"] = @"longlat"; //coordinates order
@@ -73,7 +76,7 @@
     }
 
     [self.client getPath: @"1.x/" delegate: owner parameters: params
-                 success: ^(AFHTTPRequestOperation* operation, id responseObject)
+                 success: ^(NSURLSessionDataTask *task, id responseObject)
                  {
 #ifdef DDLogInfo
         DDLogInfo(@"Yandex Geocoder finished");
@@ -83,21 +86,21 @@
                      NSMutableDictionary* places = [self convertResponse: responseObject];
                      if (places.count > 0)
                      {
-                         success(operation, responseObject, places);
+                         success(task, responseObject, places);
                      }
                      else
                      {
-                         failure(operation, [NSError errorWithDomain: @"com.yandex.geocode" code: 404
+                         failure(task, [NSError errorWithDomain: @"com.yandex.geocode" code: 404
                                                         userInfo: @{@"error" : @"Can't find places"}]);
                      }
-                 } failure: ^(AFHTTPRequestOperation* operation, NSError* error)
+                 } failure: ^(NSURLSessionDataTask *task, NSError* error)
     {
 #ifdef DDLogError
         DDLogError(@"Yandex Geocoder failed");
 #else
         NSLog(@"Yandex Geocoder failed");
 #endif
-        failure(operation, error);
+        failure(task, error);
     }];
 }
 
@@ -221,8 +224,8 @@
 */
 - (void) reversedGeocodingForLatitude: (double) latitude
                             longitude: (double) longitude
-                              success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                              failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                              success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                              failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                                 owner: (id) owner
 {
     [self reversedGeocodingForLatitude: latitude longitude: longitude language: nil kind: nil success: success
@@ -239,8 +242,8 @@
 - (void) reversedGeocodingForLatitude: (double) latitude
                             longitude: (double) longitude
                              language: (NSString*) language
-                              success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                              failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                              success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                              failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                                 owner: (id) owner
 {
     [self reversedGeocodingForLatitude: latitude longitude: longitude language: language kind: nil success: success
@@ -259,8 +262,8 @@
                             longitude: (double) longitude
                              language: (NSString*) language
                                  kind: (NSString*) kind
-                              success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                              failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                              success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                              failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                                 owner: (id) owner
 {
 #ifdef DDLogInfo
@@ -289,8 +292,8 @@
 * @param owner Delegate
 */
 - (void) forwardGeocoding: (NSString*) address
-                  success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                  failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                  success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                  failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                     owner: (id) owner
 {
 #ifdef DDLogInfo
@@ -310,8 +313,8 @@
  */
 - (void) forwardGeocoding: (NSString*) address
                  language: (NSString*) language
-                  success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                  failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                  success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                  failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                     owner: (id) owner
 {
 #ifdef DDLogInfo
@@ -341,8 +344,8 @@
                    radius: (double) radius
             limitToBounds: (BOOL) limitToBounds
                  language: (NSString*) language
-                  success: (void (^)(AFHTTPRequestOperation* operation, id responseObject, NSDictionary* places)) success
-                  failure: (void (^)(AFHTTPRequestOperation* operation, NSError* error)) failure
+                  success: (void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary* places)) success
+                  failure: (void (^)(NSURLSessionDataTask *task, NSError* error)) failure
                     owner: (id) owner
 {
 #ifdef DDLogInfo
