@@ -55,6 +55,16 @@
                  success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
                  failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure owner:(id)owner;
 
+- (void)forwardGeocoding:(NSString *)address
+          limitCenterLat:(double)limitCenterLat
+          limitCenterLng:(double)limitCenterLng
+            limitSpanLat:(double)spanLat
+            limitSpanLng:(double)spanLng
+           limitToBounds:(BOOL)limitToBounds
+                language:(NSString *)language
+                 success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure owner:(id)owner;
+
 + (CLLocation *)locationFromObject:(NSDictionary *)object;
 
 + (NSString *)titleFromObject:(NSDictionary *)object;

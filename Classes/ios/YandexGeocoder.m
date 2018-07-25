@@ -368,4 +368,45 @@
     [self makeRequestWithParams: params success: success failure: failure owner: owner];
 }
 
+
+/** Get list of places for address
+ *
+ * @param address Query string
+ * @param limitCenterLat Latitude of the center of the bounding area
+ * @param limitCenterLng Longitude of the center of the bounding area
+ * @param spanLat span in degrees for latitude
+ * @param spanLng span in degrees for longitude
+ * @param limitToBounds YES - limit search to bounding area, NO - don't limit, but return results within the bounding area first
+ */
+- (void)forwardGeocoding:(NSString *)address
+          limitCenterLat:(double)limitCenterLat
+          limitCenterLng:(double)limitCenterLng
+            limitSpanLat:(double)spanLat
+            limitSpanLng:(double)spanLng
+           limitToBounds:(BOOL)limitToBounds
+                language:(NSString *)language
+                 success:(void (^)(NSURLSessionDataTask *task, id responseObject, NSDictionary *places))success
+                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure owner:(id)owner {
+    
+#ifdef DDLogInfo
+    DDLogInfo(@"Forward geocoding: %@, lat %f, lng %f, spn-lat %f, spn-lng %f, limit %d", address, limitCenterLat, limitCenterLng, spanLat, spanLng, limitToBounds);
+#else
+    NSLog(@"Forward geocoding: %@, lat %f, lng %f, spn-lat %f, spn-lng %f, limit %d", address, limitCenterLat, limitCenterLng, spanLat, spanLng, limitToBounds);
+#endif
+    NSMutableDictionary* params = [@{
+                                     @"geocode" : address,
+                                     @"rspn" : limitToBounds ? @"1" : @"0",
+                                     @"ll" : [NSString stringWithFormat: @"%.07f,%.07f", limitCenterLng, limitCenterLat],
+                                     @"spn" : [NSString stringWithFormat: @"%.07f,%.07f", spanLng, spanLat]
+                                     } mutableCopy];
+    
+    if (language != nil)
+    {
+        params[@"lang"] = language;
+    }
+    
+    [self makeRequestWithParams: params success: success failure: failure owner: owner];
+    
+}
+
 @end
