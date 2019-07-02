@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "YandexGeocoder.h"
 
-@interface YGViewController : UIViewController <YandexGeocoderDelegate, CLLocationManagerDelegate>
+@interface YGViewController : UIViewController <CLLocationManagerDelegate>
 
 - (IBAction)onQueryToLocations:(id)sender;
 - (IBAction)onPositionToLocations:(id)sender;

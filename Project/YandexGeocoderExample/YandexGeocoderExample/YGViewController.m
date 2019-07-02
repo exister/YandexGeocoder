@@ -32,6 +32,12 @@
     self.manager.headingFilter = 30.0;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.manager requestWhenInUseAuthorization];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -44,19 +50,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onQueryToLocations:(id)sender {
-    [self.query resignFirstResponder];
-    [[YandexGeocoder sharedInstance] forwardGeocoding:self.query.text delegate:self];
-}
-
 - (IBAction)onPositionToLocations:(id)sender {
     [self.manager startUpdatingLocation];
 }
 
-#pragma mark - YandexGeocoderDelegate
-/**@name YandexGeocoderDelegate */
-
-- (void)yandexGeocoderRequestFinished:(NSMutableDictionary *)places
+- (void)yandexGeocoderRequestFinished:(NSDictionary *)places
 {
     self.console.text = places.description;
 }
@@ -66,9 +64,34 @@
     self.console.text = @"Geocoding failed";
 }
 
+- (IBAction)onQueryToLocations:(id)sender {
+    [self.query resignFirstResponder];
+    [[YandexGeocoder sharedInstance] forwardGeocoding:self.query.text
+                                             language:@"RU"
+                                              success:^(NSURLSessionDataTask *task, id responseObject, NSDictionary *places) {
+                                                  
+                                                  [self yandexGeocoderRequestFinished:places];
+                                                  
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  
+                                                  [self yandexGeocoderRequestFailed];
+                                                  
+                                              } owner:self];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
-    [[YandexGeocoder sharedInstance] reversedGeocodingForLatitude:location.coordinate.latitude longitude:location.coordinate.longitude delegate:self];
+    [[YandexGeocoder sharedInstance] reversedGeocodingForLatitude:location.coordinate.latitude
+                                                        longitude:location.coordinate.longitude
+                                                         language:@"EN"
+                                                             kind:@"house"
+                                                          success:^(NSURLSessionDataTask *task, id responseObject, NSDictionary *places) {
+                                                              [self yandexGeocoderRequestFinished:places];
+                                                          }
+                                                          failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                              [self yandexGeocoderRequestFailed];
+                                                          }
+                                                            owner:self];
 }
 @end
